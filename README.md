@@ -18,9 +18,26 @@
 
 ---
 
+## ☁️ Deployment Status
+
+**🟢 Production Deployment:** Deployed to **Google Cloud Run**
+- **Service:** `search-engine-api`
+- **Region:** `asia-south1`
+- **Secrets:** Managed via Google Secret Manager
+- **CI/CD:** GitHub Actions with Workload Identity
+- **Status:** Automatically deployed on main branch push
+
+📖 **See [CLOUD_RUN_SETUP.md](CLOUD_RUN_SETUP.md) for production deployment info**
+
+---
+
 ## 🚀 Quick Start (5 minutes)
 
-**For the fastest setup, follow this guide:**
+### For Cloud Run Users (Production)
+**Skip to [CLOUD_RUN_SETUP.md](CLOUD_RUN_SETUP.md)** - Secrets are automatically managed via Google Secret Manager when you push to `main`.
+
+### For Local Development
+**Follow these steps:**
 ```bash
 # 1. Clone repository
 git clone <repo-url>
@@ -33,9 +50,17 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Configure environment
-cp .env.example .env
-# Edit .env with your credentials
+# 4. Setup local .env (development only, never commit this)
+# Create .env file with your local credentials
+cat > .env << 'EOF'
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=campushire_db
+DB_USER=postgres
+DB_PASSWORD=postgres123
+GEMINI_API_KEY=your_api_key
+MY_API_AUTH_KEY=dev_key_12345
+EOF
 
 # 5. Run application
 python main.py
@@ -47,7 +72,15 @@ python main.py
 
 ---
 
-## 📚 Documentation
+## 📚 Documentation & Guides
+
+### 🌟 Start Here
+- [CLOUD_RUN_MIGRATION.md](CLOUD_RUN_MIGRATION.md) - **Complete overview of the setup and Cloud Run architecture**
+- [QUICKSTART.md](QUICKSTART.md) - Get running in 5 minutes (local development)
+- [CLOUD_RUN_SETUP.md](CLOUD_RUN_SETUP.md) - Production deployment on Google Cloud Run
+- [CONFIGURATION.md](CONFIGURATION.md) - How configuration and secrets management works
+
+### 📖 Full Documentation
 
 This project includes comprehensive documentation:
 
